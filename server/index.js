@@ -1,69 +1,69 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
-// var cors = require('cors');
-// const dotenv = require('dotenv');
-
-// const userRoutes = require('./src/routes/User');
-// const folderRoutes = require('./src/routes/Folder');
-// const formRoutes = require('./src/routes/Form');
-
-// const errorHandler = require('./src/middlewares/errorHandler');
-
-// const app = express();
-// dotenv.config();
-
-// app.use(cors());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-
-// app.use(userRoutes);
-// app.use(folderRoutes);
-// app.use(formRoutes);
-
-// app.get('/', (req, res) => {
-//     res.status(200).send({ status: "success", msg: "API is working well." });
-// })
-
-// app.use((req, res, next) => {
-//     const err = Object.assign(Error("Endpoint not found"), { code: 404 });
-//     next(err);
-// })
-
-// app.use(errorHandler);
-
-// const port = process.env.PORT || 1000
-// app.listen(port, () => {
-//     mongoose.connect(process.env.DB_URL).then(() => console.log('Server is running :)')).catch((error) => console.log(error))
-// })
-
-
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+var cors = require('cors');
+const dotenv = require('dotenv');
+
+const userRoutes = require('./src/routes/User');
+const folderRoutes = require('./src/routes/Folder');
+const formRoutes = require('./src/routes/Form');
+
+const errorHandler = require('./src/middlewares/errorHandler');
 
 const app = express();
+dotenv.config();
 
-// Middleware setup
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Hardcoded test route
-app.get('/api/test', (req, res) => {
-    res.status(200).json({ 
-        status: "success", 
-        msg: "This is a hardcoded API response." 
-    });
-});
+app.use(userRoutes);
+app.use(folderRoutes);
+app.use(formRoutes);
 
-// Export the app for Vercel
-module.exports = app;
+app.get('/', (req, res) => {
+    res.status(200).send({ status: "success", msg: "API is working well." });
+})
 
-// Run the server locally if not in a serverless environment
-if (process.env.NODE_ENV !== 'production') {
-    const port = process.env.PORT || 3000;
-    app.listen(port, () => {
-        console.log(`Server running locally on port ${port}`);
-    });
-}
+app.use((req, res, next) => {
+    const err = Object.assign(Error("Endpoint not found"), { code: 404 });
+    next(err);
+})
+
+app.use(errorHandler);
+
+const port = process.env.PORT || 1000
+app.listen(port, () => {
+    mongoose.connect(process.env.DB_URL).then(() => console.log('Server is running :)')).catch((error) => console.log(error))
+})
+
+
+// const express = require('express');
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
+
+// const app = express();
+
+// // Middleware setup
+// app.use(cors());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+
+// // Hardcoded test route
+// app.get('/api/test', (req, res) => {
+//     res.status(200).json({ 
+//         status: "success", 
+//         msg: "This is a hardcoded API response." 
+//     });
+// });
+
+// // Export the app for Vercel
+// module.exports = app;
+
+// // Run the server locally if not in a serverless environment
+// if (process.env.NODE_ENV !== 'production') {
+//     const port = process.env.PORT || 3000;
+//     app.listen(port, () => {
+//         console.log(`Server running locally on port ${port}`);
+//     });
+// }
