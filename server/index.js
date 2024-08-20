@@ -14,6 +14,11 @@ const app = express();
 dotenv.config();
 
 app.use(cors());
+app.use(cors({
+    origin: "https://formbot-cuvette-urej.vercel.app",
+    credentials: true
+}));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
