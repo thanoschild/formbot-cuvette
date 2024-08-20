@@ -36,34 +36,3 @@ const port = process.env.PORT || 1000
 app.listen(port, () => {
     mongoose.connect(process.env.DB_URL).then(() => console.log('Server is running :)')).catch((error) => console.log(error))
 })
-
-
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
-
-// const app = express();
-
-// // Middleware setup
-// app.use(cors());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-
-// // Hardcoded test route
-// app.get('/api/test', (req, res) => {
-//     res.status(200).json({ 
-//         status: "success", 
-//         msg: "This is a hardcoded API response." 
-//     });
-// });
-
-// // Export the app for Vercel
-// module.exports = app;
-
-// // Run the server locally if not in a serverless environment
-// if (process.env.NODE_ENV !== 'production') {
-//     const port = process.env.PORT || 3000;
-//     app.listen(port, () => {
-//         console.log(`Server running locally on port ${port}`);
-//     });
-// }
